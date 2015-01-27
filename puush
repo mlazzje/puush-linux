@@ -110,13 +110,22 @@ function puushFile ()
 	# - size (280)
 	# 
 	# sed allow to get puush direct link to image
-	fileURL=`curl "https://puush.me/api/up" -# -F "k=$PUUSH_API_KEY" -F "z=poop" -F "f=@$1" | sed -E 's/^.+,(.+),.+,.+$/\1\n/'`
+	response=`curl "https://puush.me/api/up" -# -F "k=$PUUSH_API_KEY" -F "z=poop" -F "f=@$1"`
 
-	if [ ! -z "$fileURL" ]; then
+	echo $response
+	printf "$response\n"
+
+	// TODO
+
+	fileURL = `$response | sed -E 's/^.+,(.+),.+,.+$/\1\n/'`
+	printf "$fileURL"
+
+	if [ ! -z "$fileURL" -a "$fileURL" != "-2" -a "$fileURL" != "-1" ]; then
 		#Copy link to clipboard, show notification
-		echo $fileURL
 		printf $fileURL | xclip -selection "clipboard"
 		notify-send -t 2000 "puush done! ->" "$fileURL"
+	else
+		printf "Error during upload"
 	fi
 }
 
