@@ -4,7 +4,7 @@
 # 	@date: 	January 2015
 
 # Set puush API Key here
-PUUSH_API_KEY="F2C703F2BACE24008A8BBF1052DFE954"
+PUUSH_API_KEY=""
  
 # Purpose:
 #	This script will allow you to push on puush.me images
