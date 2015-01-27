@@ -39,7 +39,7 @@ PUUSH_API_KEY=""
 # 	Options:
 # 		-a 				select area to puush
 #		-d 				puush entire desktop
-#		-f 				puush specific file
+#		-f 				puush selected file
 #		-w 				puush current window
 #
 #		-h, -?, --help 	show help page
@@ -59,7 +59,7 @@ function helpPage ()
 	printf "  Options:\n"
 	printf "	-a 		select area to puush\n"
 	printf "	-d 		puush entire desktop\n"
-	printf "	-f 		puush specific file\n"
+	printf "	-f 		puush selected file\n"
 	printf "	-w 		puush current window\n"
 	printf "\n"
 	printf "	-h, -?, --help 	show help page\n"
@@ -120,11 +120,6 @@ function puushFile ()
 	fi
 }
 
-# Generate filemane in tmp folder
-function generateFileName () { 
-	echo "/tmp/puush-$(date +"%Y-%m-%d_%I:%M:%S").png"; 
-}
-
 # check if API KEY provided
 function checkConfig () {
 	if [ -z "$PUUSH_API_KEY" ]; then
@@ -143,7 +138,7 @@ function checkConfig () {
 
 # main function
 function main () {
-	fileName=$(generateFileName)
+	fileName="/tmp/puush-$(date +"%Y-%m-%d_%I:%M:%S").png"
 	# switch to check parameter
 	case "$1" in
 		-a)
@@ -160,7 +155,8 @@ function main () {
 
 		-f)
 			echo "File upload puush"
-			puushFile "$fileName"
+			fileSelect=`zenity --file-selection`
+			puushFile "$fileSelect"
 			;;
 
 		-w)
