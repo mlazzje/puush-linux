@@ -113,12 +113,10 @@ function puushFile ()
 	response=`curl "https://puush.me/api/up" -# -F "k=$PUUSH_API_KEY" -F "z=poop" -F "f=@$1"`
 
 	echo $response
-	printf "$response\n"
+	printf "Response $response\n"
 
-	// TODO
-
-	fileURL = `$response | sed -E 's/^.+,(.+),.+,.+$/\1\n/'`
-	printf "$fileURL"
+	fileURL = `printf $response | sed -E 's/^.+,(.+),.+,.+$/\1\n/'`
+	printf "fileURL $fileURL\n"
 
 	if [ ! -z "$fileURL" -a "$fileURL" != "-2" -a "$fileURL" != "-1" ]; then
 		#Copy link to clipboard, show notification

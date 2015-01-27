@@ -33,7 +33,7 @@ puush -h, -?, --help 	show help page
 
 ## Advice
 You can add custom keyboard shortcut on Ubuntu
-![Custom keyboard shortcut]()
+![Custom keyboard shortcut](http://puu.sh/f7qKp/6c20d3a1e4.png)
 
 ## Alternatives
 - puush in command line https://github.com/blha303/puush-linux
