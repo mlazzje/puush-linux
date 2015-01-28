@@ -38,7 +38,7 @@ PREFIX_NOTIF="Puush:"
 # Usage: puush [OPTION...] [FILE-PATH]
 #
 # 	Options:
-# 		-a 				select area to puush
+# 		-a 				puush an area
 #		-d 				puush entire desktop
 #		-f 				puush selected file //TODO
 #		-w 				puush current window
@@ -58,7 +58,7 @@ function helpPage ()
 	printf "Usage: puush [OPTION...] [FILE-PATH]\n"
 	printf "\n"
 	printf "  Options:\n"
-	printf "	-a 		select area to puush\n"
+	printf "	-a 		puush an area\n"
 	printf "	-d 		puush entire desktop\n"
 	printf "	-f 		puush selected file //TODO\n"
 	printf "	-w 		puush current window\n"

@@ -36,11 +36,11 @@ puush -h, -?, --help 	show help page
 
 Advice
 ------
-You can add custom keyboard shortcuts on Ubuntu
+You can add your custom keyboard shortcuts on Ubuntu
 ![Custom keyboard shortcuts](http://puu.sh/faeyv/5826ed5586.png "Custom keyboard shortcut")
 
 Alternatives
 ------------
 - puush in command line https://github.com/blha303/puush-linux
 - puush using keyboard https://github.com/sgoo/puush-linux
-- puush ubuntu https://github.com/sunmockyang/puush-linux
+- puush linux forked https://github.com/sunmockyang/puush-linux
