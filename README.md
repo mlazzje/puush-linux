@@ -20,13 +20,13 @@ Instructions
 2. Create an account here http://puush.me/register
 3. Add your puush API key to PUUSH_API_KEY in file "puush" line 7
 	(Find your API key here at http://puush.me/account/setting)
-4. Make you file executable __chmod +x puush__
+4. Make your file executable __chmod +x puush__
 5. Place it in "/usr/local/bin"
 
 Usage
 -----
 ``` bash
-puush -a 				select area to puush
+puush -a 				puush an area
 puush -d 				puush entire desktop
 puush -f 				puush selected file //TODO
 puush -w 				puush current window
