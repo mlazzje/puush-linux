@@ -3,8 +3,8 @@ Puush for Linux
 
 Purpose
 -------
-This script will allow you to push on puush.me images
-An unique link provided by puush.me will be pasted in your clipboard
+This script will allow you to push on puush.me images.
+An unique link provided by puush.me will be pasted in your clipboard.
 You will be able to share this link to everyone
 
 Dependencies
