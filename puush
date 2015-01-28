@@ -5,6 +5,8 @@
 
 # Set puush API Key here
 PUUSH_API_KEY=""
+# Prefix error
+PREFIX_NOTIF="Puush:"
  
 # Purpose:
 #	This script will allow you to push on puush.me images
@@ -16,7 +18,6 @@ PUUSH_API_KEY=""
 # 	curl				(HTTP requests)
 # 	xclip				(clipboard)
 # 	notify-send 		(notifications)
-# 	zenity 				(file selector)
 #
 # Please install packages above before to run this script
 #
@@ -39,7 +40,7 @@ PUUSH_API_KEY=""
 # 	Options:
 # 		-a 				select area to puush
 #		-d 				puush entire desktop
-#		-f 				puush selected file
+#		-f 				puush selected file //TODO
 #		-w 				puush current window
 #
 #		-h, -?, --help 	show help page
@@ -59,7 +60,7 @@ function helpPage ()
 	printf "  Options:\n"
 	printf "	-a 		select area to puush\n"
 	printf "	-d 		puush entire desktop\n"
-	printf "	-f 		puush selected file\n"
+	printf "	-f 		puush selected file //TODO\n"
 	printf "	-w 		puush current window\n"
 	printf "\n"
 	printf "	-h, -?, --help 	show help page\n"
@@ -74,7 +75,6 @@ function helpPage ()
 	printf "	curl 			(HTTP requests)\n"
 	printf "	xclip 			(clipboard)\n"
 	printf "	notify-send 		(notifications)\n"
-	printf "	zenity 			(file selector)\n"
 	printf "\n"
 	printf "Please install packages above before to run this script\n"
 	printf "\n"
@@ -84,9 +84,13 @@ function helpPage ()
 	printf "Report bugs to ml@zzje.fr\n"
 }
 
-# without option puush direct file passed in argument
-function puushFile ()
-{
+function sendToPuush () {
+	response=`curl "https://puush.me/api/up" -# -F "k=$PUUSH_API_KEY" -F "z=poop" -F "f=@$1"`
+	echo $response
+}
+
+# puush direct file passed in argument
+function sendFile () {
 	if [ -z "$1" ]; then # if null
 		echo "No file specified"
 		helpPage
@@ -110,21 +114,45 @@ function puushFile ()
 	# - size (280)
 	# 
 	# sed allow to get puush direct link to image
-	response=`curl "https://puush.me/api/up" -# -F "k=$PUUSH_API_KEY" -F "z=poop" -F "f=@$1"`
+	response=$(sendToPuush $1)
+	
+	# parse response
+	IFS=","
+	set -- $response
+	unset IFS
+	resArr=($@)
+	# error response (0,-1,-2)
+	responseCode=${resArr[0]}
 
-	echo $response
-	printf "Response $response\n"
+	case "$responseCode" in
+		0)
+			fileURL=${resArr[1]}
+			;;
 
-	fileURL = `printf $response | sed -E 's/^.+,(.+),.+,.+$/\1\n/'`
-	printf "fileURL $fileURL\n"
+		-1)
+			echo "Failure upload: Error -1"
+			notify-send -t 2000 "$PREFIX_NOTIF Failure upload: Error -1"
+			exit 1
+			;;
 
-	if [ ! -z "$fileURL" -a "$fileURL" != "-2" -a "$fileURL" != "-1" ]; then
-		#Copy link to clipboard, show notification
-		printf $fileURL | xclip -selection "clipboard"
-		notify-send -t 2000 "puush done! ->" "$fileURL"
-	else
-		printf "Error during upload"
-	fi
+		-2)
+			echo "Failure upload: no filename header, Error -2"
+			notify-send -t 2000 "$PREFIX_NOTIF Failure upload: no filename header, Error -2"
+			exit 1
+			;;
+			
+		*)
+			echo "Faire upload: Error unknown"
+			notify-send -t 2000 "$PREFIX_NOTIF Faire upload: Error unknown"
+			exit 1
+			;;	
+	esac
+
+	# fileURL from puush
+	fileURL=${resArr[1]}
+
+	printf $fileURL | xclip -selection "clipboard"
+	notify-send -t 2000 "$PREFIX_NOTIF done! -> $fileURL"
 }
 
 # check if API KEY provided
@@ -135,7 +163,7 @@ function checkConfig () {
 		echo "Don't forget to create an account here http://puush.me/register"
 		echo "You can find your API key at http://puush.me/account/settings"
 
-		notify-send "Set the variable PUUSH_API_KEY in $0 line 7" "Find your API key at http://puush.me/account/settings"
+		notify-send -t 2000 "$PREFIX_NOTIF Set the variable PUUSH_API_KEY in $0 line 7" "Find your API key at http://puush.me/account/settings"
 
 		exit 1
 
@@ -151,25 +179,25 @@ function main () {
 		-a)
 			echo "Area puush"
 			gnome-screenshot -a -f "$fileName"
-			puushFile "$fileName"
+			sendFile "$fileName"
 			;;
 
 		-d)
 			echo "Desktop puush"
 			gnome-screenshot -f "$fileName"
-			puushFile "$fileName"
+			sendFile "$fileName"
 			;;
 
 		-f)
 			echo "File upload puush"
 			fileSelect=`zenity --file-selection`
-			puushFile "$fileSelect"
+			sendFile "$fileSelect"
 			;;
 
 		-w)
 			echo "Window puush"
 			gnome-screenshot -w -f "$fileName"
-			puushFile "$fileName"
+			sendFile "$fileName"
 			;;
 
 		-h|-\?|--help)
@@ -179,7 +207,7 @@ function main () {
 			
 		*)
 			echo "Upload $1"
-			puushFile "$1"
+			sendFile "$1"
 			;;	
 	esac
 }

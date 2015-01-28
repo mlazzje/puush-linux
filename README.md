@@ -11,7 +11,6 @@ You will be able to share this link to everyone
 	curl				(HTTP requests)
 	xclip				(clipboard)
 	notify-send 		(notifications)
-	zenity 				(file selector)
 
 ## Instructions
 	- Get this script by cloning or download this repository
@@ -25,7 +24,7 @@ You will be able to share this link to everyone
 ``` bash
 puush -a 				select area to puush
 puush -d 				puush entire desktop
-puush -f 				puush selected file
+puush -f 				puush selected file //TODO
 puush -w 				puush current window
 
 puush -h, -?, --help 	show help page
