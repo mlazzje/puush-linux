@@ -9,19 +9,19 @@ You will be able to share this link to everyone
 
 Dependencies
 ------------
-	* gnome-screenshot	(take screenshot)
-	* curl				(HTTP requests)
-	* xclip				(clipboard)
-	* notify-send 		(notifications)
+* gnome-screenshot	(take screenshot)
+* curl				(HTTP requests)
+* xclip				(clipboard)
+* notify-send 		(notifications)
 
 Instructions
 ------------
-	1. Get this script by cloning or download this repository
-	2. Create an account here http://puush.me/register
-	3. Add your puush API key to PUUSH_API_KEY in file "puush" line 7
+1. Get this script by cloning or download this repository
+2. Create an account here http://puush.me/register
+3. Add your puush API key to PUUSH_API_KEY in file "puush" line 7
 	(Find your API key here at http://puush.me/account/setting)
-	4. Make you file executable __chmod +x puush__
-	5. Place it in "/usr/local/bin"
+4. Make you file executable __chmod +x puush__
+5. Place it in "/usr/local/bin"
 
 Usage
 -----
