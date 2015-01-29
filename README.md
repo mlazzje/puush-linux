@@ -14,6 +14,13 @@ Dependencies
 * xclip				(clipboard)
 * notify-send 		(notifications)
 
+``` bash
+apt-get install gnome-screenshot
+apt-get install curl
+apt-get install xclip
+apt-get install notify-send
+```
+
 Instructions
 ------------
 1. Get this script by cloning or download this repository
