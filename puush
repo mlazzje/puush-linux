@@ -11,7 +11,7 @@ PREFIX_NOTIF="Puush:"
 # Purpose:
 #	This script will allow you to push on puush.me images
 #	An unique link provided by puush.me will be pasted in your clipboard
-#	You will be able to share this link to everyone
+#	You will be able to share this link to anyone
 #
 # Dependencies:
 # 	gnome-screenshot	(take screenshot)
@@ -19,7 +19,7 @@ PREFIX_NOTIF="Puush:"
 # 	xclip				(clipboard)
 # 	notify-send 		(notifications)
 #
-# Please install packages above before to run this script
+# Please install packages above before running this script
 #
 # Licence: 
 #	Beerware
@@ -76,7 +76,7 @@ function helpPage ()
 	printf "	xclip 			(clipboard)\n"
 	printf "	notify-send 		(notifications)\n"
 	printf "\n"
-	printf "Please install packages above before to run this script\n"
+	printf "Please install packages above before running this script\n"
 	printf "\n"
 	printf "Don't forget to create an account here http://puush.me/register\n"
 	printf "Don't forget to provide your puush API KEY in script line 7\n"
