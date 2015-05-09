@@ -1,5 +1,5 @@
-Puush for Linux
-=====================
+Puush for Linux - Gnome environment
+===================================
 
 Purpose
 -------
