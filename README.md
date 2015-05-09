@@ -1,5 +1,5 @@
-Puush for Linux - Gnome environment
-===================================
+Puush for Linux
+===============
 
 Purpose
 -------
@@ -43,7 +43,7 @@ puush -h, -?, --help 	show help page
 
 Advice
 ------
-You can add your custom keyboard shortcuts on Ubuntu
+You can add your custom keyboard shortcuts on Ubuntu/Debian
 ![Custom keyboard shortcuts](http://puu.sh/faeyv/5826ed5586.png "Custom keyboard shortcut")
 
 Alternatives
